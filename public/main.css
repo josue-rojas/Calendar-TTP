@@ -1,3 +1,8 @@
+/*change defaults*/
+.row{
+  width: 100vw;
+  margin: 0;
+}
 .col-md-1{
   flex: 0 0 11.111111%;
   max-width: 11.11111%;
@@ -7,11 +12,11 @@
   max-width: 77.777777%;
 }
 
+
+/*other stuff*/
 .month-name{
   margin-top: 10px;
 }
-
-
 .day,.date,.month-name{
   border: solid 1px black;
   text-align: center;
@@ -27,11 +32,49 @@
   min-height: 50px;
   display: flex;
 }
-
 .date .day-number{
   margin-left: -10px;
 }
-
 .date:hover{
   cursor: pointer;
+}
+.day:hover, .no-date:hover{
+  cursor: default;
+}
+
+.events{
+  display: none;
+  position: absolute;
+}
+.events .stuff{
+  border: solid 1px black;
+  background-color: white;
+  margin-top: 10px;
+}
+.events.show{
+  display: flex;
+  z-index: 1000;
+}
+.events .events-date{
+  margin: 10px;
+  text-align: center;
+}
+.events .priority-buttons, .events .submit-buttons{
+  display: flex;
+  justify-content: center;
+}
+.btn{
+  margin: 5px;
+}
+
+.time-form{
+  display: flex;
+  justify-content: center;
+}
+.time-form select, .time-form label{
+  margin-right: 5px;
+}
+.time-form .form-control{
+  display: inline-block;
+  width: inherit;
 }

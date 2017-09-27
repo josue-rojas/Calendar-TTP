@@ -15,12 +15,61 @@
 
   <title>Calander</title>
 </head>
-<body class="">
-
+<body class='body' data-month='<%= thisMonth %>' data-year='<%= thisYear %>'>
+  <!-- events and form row -->
+  <div class='row events'>
+    <div class="col-md-1"></div>
+    <div class="col-md-7 stuff">
+      <!-- date -->
+      <div class='events-date'></div>
+      <div class="form-group time-form">
+        <label for="time-start">Time Start</label>
+        <select class="form-control hour-start" id="hour-start">
+          <% for(var h = 0; h < 24; h++){ %>
+            <option><%= h %></option>
+          <% } %>
+        </select>
+        :
+        <select class="form-control min-start" id="min-start">
+          <% for(var h = 0; h < 59; h++){ %>
+            <option><% if(h < 10) {%>0<% } %><%= h %></option>
+          <% } %>
+        </select>
+        <label for="time-end">Time End</label>
+        <select class="form-control hour-end" id="hour-end">
+          <% for(var h = 0; h < 24; h++){ %>
+            <option><%= h %></option>
+          <% } %>
+        </select>
+        :
+        <select class="form-control min-end" id="min-end">
+          <% for(var h = 0; h < 59; h++){ %>
+            <option><% if(h < 10) {%>0<% } %><%= h %></option>
+          <% } %>
+        </select>
+      </div>
+      <!-- priority buttons -->
+      <div class='priority-buttons'>
+        <button class='btn btn-success disabled priority' data-priority=0>Low</button>
+        <button class='btn btn-warning priority' data-priority=1>Medium</button>
+        <button class='btn btn-danger priority' data-priority=2>High</button>
+      </div>
+      <!-- description -->
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea class="form-control" id="description" rows="3"></textarea>
+      </div>
+      <!-- submit buttons -->
+      <div class='submit-buttons'>
+        <button class="btn btn-primary" type="submit" onclick='submitNew()'>Submit</button>
+      </div>
+    </div>
+    <div class="col-md-1"></div>
+  </div>
   <!-- month -->
   <div class="row">
     <div class="col-md-1"></div>
-    <div class="col-md-7 month-name"><%= thisMonth %></div>
+    <div class="col-md-7 month-name "><%= thisMonth %></div>
     <div class="col-md-1"></div>
   </div>
   <!-- Name of days -->
@@ -50,7 +99,7 @@
           <% dateStarted = true %>
         <% } %>
         <% if(dateStarted && dayNumber < date_end+1){ %>
-          <div class='day-number'>
+          <div class='day-number' data-day='<%= dayNumber %>'>
             <%= dayNumber++ %>
           </div>
         <% } %>
@@ -62,7 +111,7 @@
           <% dateStarted = true %>
         <% } %>
         <% if(dateStarted  && dayNumber < date_end+1){ %>
-          <div class='day-number'>
+          <div class='day-number' data-day='<%= dayNumber %>'>
             <%= dayNumber++ %>
           </div>
         <% } %>
@@ -74,7 +123,7 @@
           <% dateStarted = true %>
         <% } %>
         <% if(dateStarted  && dayNumber < date_end+1){ %>
-          <div class='day-number'>
+          <div class='day-number' data-day='<%= dayNumber %>'>
             <%= dayNumber++ %>
           </div>
         <% } %>
@@ -86,7 +135,7 @@
           <% dateStarted = true %>
         <% } %>
         <% if(dateStarted  && dayNumber < date_end+1){ %>
-          <div class='day-number'>
+          <div class='day-number' data-day='<%= dayNumber %>'>
             <%= dayNumber++ %>
           </div>
         <% } %>
@@ -98,7 +147,7 @@
           <% dateStarted = true %>
         <% } %>
         <% if(dateStarted  && dayNumber < date_end+1){ %>
-          <div class='day-number'>
+          <div class='day-number' data-day='<%= dayNumber %>'>
             <%= dayNumber++ %>
           </div>
         <% } %>
@@ -110,7 +159,9 @@
           <% dateStarted = true %>
         <% } %>
         <% if(dateStarted  && dayNumber < date_end+1){ %>
-          <%= dayNumber++ %>
+          <div class='day-number' data-day='<%= dayNumber %>'>
+            <%= dayNumber++ %>
+          </div>
         <% } %>
       </div>
     <!-- saturday --->
@@ -120,7 +171,7 @@
           <% dateStarted = true %>
         <% } %>
         <% if(dateStarted  && dayNumber < date_end+1){ %>
-          <div class='day-number'>
+          <div class='day-number' data-day='<%= dayNumber %>'>
             <%= dayNumber++ %>
           </div>
         <% } %>
