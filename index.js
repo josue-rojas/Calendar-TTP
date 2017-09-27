@@ -13,5 +13,9 @@ console.log('pgClient',connectionString)
 pgClient.connect();
 
 
+app.get('/', (req, res) => {
+  res.render('main');
+})
+
 app.listen(8080);
 console.log('listening on port 8080')
