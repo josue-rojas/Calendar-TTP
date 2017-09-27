@@ -16,6 +16,13 @@
   <title>Calander</title>
 </head>
 <body class="">
+
+  <!-- month -->
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-7 month-name"><%= thisMonth %></div>
+    <div class="col-md-1"></div>
+  </div>
   <!-- Name of days -->
   <div class="row">
     <div class="col-md-1"></div>
@@ -33,17 +40,19 @@
   <% dayNumber = 1 %>
 
   <% for(total=0; total < 45; total++){%>
-    <!-- sunday --->
     <% if(total%9 == 0){ %>
       <div class="row">
       <div class="col-md-1"></div>
+    <!-- sunday --->
     <% }else if(total%9 == 1){ %>
       <div class="col-md-1 date">
         <% if(date_name_start == 0){ %>
           <% dateStarted = true %>
         <% } %>
         <% if(dateStarted && dayNumber < date_end+1){ %>
-          <%= dayNumber++ %>
+          <div class='day-number'>
+            <%= dayNumber++ %>
+          </div>
         <% } %>
       </div>
     <!-- monday --->
@@ -53,7 +62,9 @@
           <% dateStarted = true %>
         <% } %>
         <% if(dateStarted  && dayNumber < date_end+1){ %>
-          <%= dayNumber++ %>
+          <div class='day-number'>
+            <%= dayNumber++ %>
+          </div>
         <% } %>
       </div>
     <!-- tuesday --->
@@ -63,7 +74,9 @@
           <% dateStarted = true %>
         <% } %>
         <% if(dateStarted  && dayNumber < date_end+1){ %>
-          <%= dayNumber++ %>
+          <div class='day-number'>
+            <%= dayNumber++ %>
+          </div>
         <% } %>
       </div>
     <!-- wednesday --->
@@ -73,7 +86,9 @@
           <% dateStarted = true %>
         <% } %>
         <% if(dateStarted  && dayNumber < date_end+1){ %>
-          <%= dayNumber++ %>
+          <div class='day-number'>
+            <%= dayNumber++ %>
+          </div>
         <% } %>
       </div>
     <!-- thursday --->
@@ -83,7 +98,9 @@
           <% dateStarted = true %>
         <% } %>
         <% if(dateStarted  && dayNumber < date_end+1){ %>
-          <%= dayNumber++ %>
+          <div class='day-number'>
+            <%= dayNumber++ %>
+          </div>
         <% } %>
       </div>
     <!-- friday --->
@@ -103,7 +120,9 @@
           <% dateStarted = true %>
         <% } %>
         <% if(dateStarted  && dayNumber < date_end+1){ %>
-          <%= dayNumber++ %>
+          <div class='day-number'>
+            <%= dayNumber++ %>
+          </div>
         <% } %>
       </div>
     <% }else if(total%9 == 8){ %>

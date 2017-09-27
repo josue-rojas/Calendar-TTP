@@ -22,18 +22,30 @@ function LastDayOfMonth(Year, Month) {
 function FirsDayNameOfMonth(Year, Month) {
   return (new Date(Year, Month)).getDay()
 }
+function numToMonth(Month){
+  return (['January','February', 'March', 'April', 'May', 'June', 'July', 'August','September','October','November','December'])[Month]
+}
 // ----------------------- routes -----------------------
-app.get('/', (req, res) => {
+// current month and default route
+app.get('/', (req, res, next) => {
   thisMonth = (new Date()).getMonth()
   thisYear = (new Date()).getFullYear()
+  res.render('calender', {date_end:LastDayOfMonth(thisYear, thisMonth), date_name_start:FirsDayNameOfMonth(thisYear, thisMonth), thisMonth:numToMonth(thisMonth)});
+})
 
-  res.render('calender', {date_end:LastDayOfMonth(thisYear, thisMonth), date_name_start:FirsDayNameOfMonth(thisYear, thisMonth)});
+// current month if no query (month and year)
+// SHOULD FIX TO NOT START AT 0
+app.get('/date', (req, res) => {
+  thisMonth =  !req.query.month ? (new Date()).getMonth() : req.query.month
+  thisYear = !req.query.year ? (new Date()).getFullYear() : req.query.year
+  res.render('calender', {date_end:LastDayOfMonth(thisYear, thisMonth), date_name_start:FirsDayNameOfMonth(thisYear, thisMonth), thisMonth:numToMonth(thisMonth)});
 })
 
 
 app.get('/*', (req, res) =>{
   res.redirect('/');
 })
+
 
 // ----------------------- start -----------------------
 app.listen(process.env.PORT);
