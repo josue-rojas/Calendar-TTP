@@ -9,7 +9,6 @@ app.use(parser.json());
 app.set('view engine', 'ejs')
 var connectionString = process.env.DATABASE_URL;
 var pgClient = new pg.Client(connectionString);
-console.log('pgClient',connectionString)
 pgClient.connect();
 
 
@@ -17,5 +16,5 @@ app.get('/', (req, res) => {
   res.render('main');
 })
 
-app.listen(8080);
-console.log('listening on port 8080')
+app.listen(process.env.PORT);
+console.log('listening on port '+process.env.PORT)
