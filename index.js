@@ -13,7 +13,7 @@ pgClient.connect();
 
 
 app.get('/', (req, res) => {
-  res.render('main');
+  res.render('calender');
 })
 
 app.listen(process.env.PORT);
