@@ -50,7 +50,6 @@ app.get('/', (req, res, next) => {
   thisYear = (new Date()).getFullYear()
   pool.query('SELECT * FROM events WHERE year='+ thisYear +' and monthNum='+thisMonth)
   .then(results => {
-    console.log(results.rows)
     res.render('calender', {date_end:LastDayOfMonth(thisYear, thisMonth), date_name_start:FirsDayNameOfMonth(thisYear, thisMonth), thisMonth:indexToMonth[thisMonth], year:thisYear, events:results.rows});})
   .catch(e => console.error(e.stack))
 })
@@ -62,7 +61,6 @@ app.get('/date', (req, res) => {
   thisYear = !req.query.year ? (new Date()).getFullYear() : req.query.year
   pool.query('SELECT * FROM events WHERE year='+ thisYear +' and monthNum='+thisMonth)
   .then(results => {
-    console.log(results.rows)
     res.render('calender', {date_end:LastDayOfMonth(thisYear, thisMonth), date_name_start:FirsDayNameOfMonth(thisYear, thisMonth), thisMonth:indexToMonth[thisMonth], year:thisYear, events:results.rows});})
   .catch(e => console.error(e.stack))
 })
@@ -78,7 +76,7 @@ app.post('/events',(req, res) => {
 
 app.delete('/events/:id',(req, res) =>{
   pool.query("DELETE FROM events WHERE id="+req.params.id);
-  res.end('{success : "Updated Successfully", "status" : 200}');
+  res.end('{success : "Deleted Successfully", "status" : 200}');
 })
 
 // ----------------------- start -----------------------

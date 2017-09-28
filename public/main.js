@@ -1,3 +1,4 @@
+
 // --------------------- constants & vars--------------------------
 monthToIndex={
   'January': 0,
@@ -13,8 +14,39 @@ monthToIndex={
   'November': 10,
   'December':11
 }
-var year, month, day;
+var year, month, day, curID;
 var priority = 0 // 0 -> low, 1 -> medium, 2 -> high
+//
+const defaultEvents = "\
+    <div class='row'>\
+      <div class='col-md-1'></div>\
+      <div class='col-md-7 events-table-cell month-name'>\
+        <div class='events-date'></div>\
+      </div>\
+      <div class='col-md-1'></div>\
+    </div>\
+  <div class='row events-table'>\
+    <div class='col-md-1'></div>\
+    <div class='col-md-1 events-table-cell'>Start</div>\
+    <div class='col-md-1 events-table-cell'>End</div>\
+    <div class='col-md-1 events-table-cell'>Priority</div>\
+    <div class='col-md-2 events-table-cell'>Description</div>\
+    <div class='col-md-2 events-table-cell'></div>\
+    <div class='col-md-1'></div>\
+  </div>\
+  "
+const lastRow = "\
+<div class='row'>\
+  <div class='col-md-1'></div>\
+  <div class='col-md-7 events-table-cell'>\
+    <div class='extra-buttons'>\
+      <button class='btn btn-info' onclick='showForm()'>New</button>\
+      <button class='btn btn-success' onclick='cancelNew()'>Cancel</button>\
+    </div>\
+  </div>\
+  <div class='col-md-1'></div></div>\
+</div>\
+"
 
 // --------------------- dom ready stuff --------------------------
 // add on click to those with numbers and not the empty ones, and set constants
@@ -44,16 +76,16 @@ $( document ).ready(function() {
     eventPrior = $($events[e]).data('priority')
     $calenderDay = $('.day-number[data-day="' + eventday + '"]').closest('.date')
     $calenderDay.addClass(' hasEvent')
-    if(eventPrior == 0){
+    if(eventPrior == 'low'){
       low = parseInt($calenderDay.attr('low')) + 1
       $calenderDay.closest('.date').attr('low', low)
     }
-    else if(eventPrior == 1){
+    else if(eventPrior == 'medium'){
       medium = parseInt($calenderDay.attr('medium')) + 1
       $calenderDay.closest('.date').attr('medium', medium)
 
     }
-    else if(eventPrior == 2){
+    else if(eventPrior == 'high'){
       high = parseInt($calenderDay.attr('high')) + 1
       $calenderDay.closest('.date').attr('high', high)
     }
@@ -75,6 +107,11 @@ $( document ).ready(function() {
 });
 
 // --------------------- funtions (clicks and such) --------------------------
+function cancelNew(){
+  $('.events-table-wrapper').removeClass('show-events')
+  $('.calendar-wrapper').removeClass('hide-calendar')
+  $('.row.events').removeClass('show')
+}
 //this will set the priority
 function disableButton(target){
   $('.btn.priority').removeClass('disabled')
@@ -82,13 +119,60 @@ function disableButton(target){
   priority = $(target).data('priority')
 }
 
+function showForm(){
+  cancelNew()
+  $('.calendar-wrapper').addClass('hide-calendar')
+  $('.row.events').find('.events-date').text(month + ' ' + day + ', ' + year)
+  $('.row.events').addClass('show')
+}
+
 // to show events and forms
 function eventsStuff(target){
+  $('.events-table-wrapper').html(defaultEvents)
   day = $(target).find('.day-number').data('day')
-  $events = $('.events')
+  $events = $('.events-table-wrapper')
   $events.find('.events-date').text(month + ' ' + day + ', ' + year)
-  $events.addClass('show')
-  // console.log(new Date(year, monthToIndex[month], day))
+  $dayEvents = $('.single-event[data-eventday="'+ day + '"]')
+  html = ''
+  for(var rowEvent = 0; rowEvent < $dayEvents.length; rowEvent++){
+    $singleEvent = $($dayEvents[rowEvent])
+    html += '<div class="row"> \
+    <div class="col-md-1"></div> \
+    <div class="col-md-1 events-table-cell">'
+    + $singleEvent.data('hourstart')
+    + ' :'
+    + $singleEvent.data('minstart')
+    +' </div> \
+    <div class="col-md-1 events-table-cell">'
+    + $singleEvent.data('hourend')
+    + ' :'
+    + $singleEvent.data('minend')
+    + '</div>\
+    <div class="col-md-1 events-table-cell priority-cell">\
+    <div class="'
+    + $singleEvent.data('priority')
+    + '-circle priority-circle"></div></div>\
+    <div class="col-md-2 events-table-cell">'
+    + $singleEvent.data('description')
+    +'</div> \
+    <div class="col-md-2 events-table-cell">'
+    + "<div class='event-buttons'>\
+      <button class='btn btn-success disabled' onclick=editEvent("
+      + $singleEvent.data('id')
+      +")>Edit\
+      </button>\
+      <button class='btn btn-warning' onclick='deleteEvent("
+      + $singleEvent.data('id')
+      +")'>Delete</button>\
+    </div>"
+    +'</div> \
+    <div class="col-md-1"></div> \
+    </div>';
+  }
+  $('.events-table-wrapper').append(html)
+  $('.events-table-wrapper').append(lastRow)
+  $events.addClass('show-events')
+  $('.calendar-wrapper').addClass('hide-calendar')
 }
 
 // --------------------- api requests --------------------------
@@ -114,6 +198,17 @@ function submitNew(){
     data: JSON.stringify(newData),
     success:function(res){
       window.location = window.location; //refresh
+    }
+  })
+}
+
+function deleteEvent(curID){
+  $.ajax({
+    type:'DELETE',
+    url:'/events/'+curID,
+    datatype: 'json',
+    success:function(res){
+      window.location = window.location
     }
   })
 }
