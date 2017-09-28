@@ -6,6 +6,7 @@ Must Have Specs
 - ~~Ignore users/login, just have one hardcoded user~~
 - HTML rendered client side
 - Click on a day box, and be able to create a new event on that day which gets sent to the backend on clicking submit.
+
    - ~~The form should have start time, end time, description and submit.~~
    - ~~Once submit is clicked the form should disappear.~~
    - Event should now appear in that day’s box.

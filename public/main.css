@@ -95,13 +95,13 @@
   height: 100%;
 }
 .priority-bars .low-bar{
-  background-color: green;
+  background-color: #28a745;
 }
 .priority-bars .medium-bar{
-  background-color: yellow;
+  background-color: #ffc107;
 }
 .priority-bars .high-bar{
-  background-color: red;
+  background-color: #dc3545;
 }
 .low-bar, .medium-bar, .high-bar{
   display: block;
