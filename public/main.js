@@ -124,7 +124,6 @@ function cancelNew(){
 }
 //this will set the priority
 function disableButton(target){
-  console.log(target)
   $('.btn.priority').removeClass('disabled')
   $(target).addClass('disabled')
   priority = $(target).data('priority')

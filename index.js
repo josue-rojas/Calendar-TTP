@@ -89,7 +89,6 @@ app.get('/events/q', (req,res) =>{
   description =  !req.query.description ? '' : "description='"+req.query.description+"'" // maybe i should remove this one
   newQuery = [month, monthNum, year, day, hours, mins, houre, mine, priority, description].filter(function(w){return w.length > 0}).join(' and ')
   newQuery =  newQuery.length < 1 ? 'SELECT * FROM events' : 'SELECT * FROM events WHERE ' + newQuery
-  console.log(newQuery)
   pool.query(newQuery)
   .then(results =>{
     res.end(JSON.stringify(results.rows))
@@ -113,7 +112,6 @@ app.get('/*', (req, res) =>{
 
 //post new events
 app.post('/events',(req, res) => {
-  console.log('month', req.body.month)
   pool.query('INSERT INTO events(id, year, monthNum, month, day, hourStart, minStart, hourEnd, minEnd, priority, description) values(DEFAULT, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10)',[req.body.year, req.body.monthNum, req.body.month, req.body.day, req.body.hourStart, req.body.minStart, req.body.hourEnd, req.body.minEnd, req.body.priority, req.body.description])
   res.end('{success : "Updated Successfully", "status" : 200}');
 })
