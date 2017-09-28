@@ -119,7 +119,7 @@ app.post('/events',(req, res) => {
 })
 
 //update an event NEED TO TEST
-app.post('/events/:id'(req,res) => {
+app.post('/events/:id', (req,res) => {
   pool.query('UPDATE events SET year=$1, monthNum=$2, month=$3, day=$3, hourStart=$4, minStart=$5, hourEnd=$6, minEnd=$7, priority=$8, description=$9  WHERE id='+req.params.id,[req.body.year, req.body.monthNum, req.body.month, req.body.day, req.body.hourStart, req.body.minStart, req.body.hourEnd, req.body.minEnd, req.body.priority, req.body.description])
   res.end('{success : "Updated Successfully", "status" : 200}');
 })
