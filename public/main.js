@@ -26,12 +26,52 @@ $( document ).ready(function() {
   for(var i = 0; i < days.length; i++){
     if(!($(days[i]).find('.day-number').length == 0)){
       $(days[i]).click(function(){eventsStuff(this)})
+      $(days[i]).attr('low', '0')
+      $(days[i]).attr('medium', '0')
+      $(days[i]).attr('high', '0')
     }
     else{
       $(days[i]).addClass('no-date')
     }
   }
   $('.btn.priority').click(function(){disableButton(this)})
+
+
+  //organize data(events)
+  $events = $('.single-event')
+  for(var e=0; e < $events.length; e++){
+    eventday = $($events[e]).data('eventday')
+    eventPrior = $($events[e]).data('priority')
+    $calenderDay = $('.day-number[data-day="' + eventday + '"]').closest('.date')
+    $calenderDay.addClass(' hasEvent')
+    if(eventPrior == 0){
+      low = parseInt($calenderDay.attr('low')) + 1
+      $calenderDay.closest('.date').attr('low', low)
+    }
+    else if(eventPrior == 1){
+      medium = parseInt($calenderDay.attr('medium')) + 1
+      $calenderDay.closest('.date').attr('medium', medium)
+
+    }
+    else if(eventPrior == 2){
+      high = parseInt($calenderDay.attr('high')) + 1
+      $calenderDay.closest('.date').attr('high', high)
+    }
+  }
+
+  $days = $('.hasEvent')
+  for(var d = 0; d < $days.length; d++){
+    lowT = parseInt($($days[d]).attr('low'))
+    mediumT = parseInt($($days[d]).attr('medium'))
+    highT = parseInt($($days[d]).attr('high'))
+    total = lowT + mediumT + highT
+    lowPerc = (lowT / total) * 100
+    medPerc = (mediumT / total) * 100
+    highPerc = (highT / total) * 100
+    $($days[d]).find('.low-bar').css('height', lowPerc + '%')
+    $($days[d]).find('.medium-bar').css('height', medPerc + '%')
+    $($days[d]).find('.high-bar').css('height', highPerc + '%')
+  }
 });
 
 // --------------------- funtions (clicks and such) --------------------------
@@ -54,7 +94,6 @@ function eventsStuff(target){
 // --------------------- api requests --------------------------
 // api calls
 function submitNew(){
-   $("#hour-start").find(':selected').text()
   newData = {
     'year': year,
     'monthNum': monthToIndex[month],
@@ -69,7 +108,7 @@ function submitNew(){
   }
   $.ajax({
     type:'POST',
-    url:'/event',
+    url:'/events',
     datatype:'json',
     contentType: 'application/json',
     data: JSON.stringify(newData),
@@ -77,5 +116,4 @@ function submitNew(){
       window.location = window.location; //refresh
     }
   })
-  console.log(newData)
 }

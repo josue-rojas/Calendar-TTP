@@ -13,7 +13,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
   <script src="/main.js"></script>
 
-  <title>Calander</title>
+  <title>Calendar <%= thisMonth %> <%= thisYear %></title>
 </head>
 <body class='body' data-month='<%= thisMonth %>' data-year='<%= thisYear %>'>
   <!-- events and form row -->
@@ -102,6 +102,11 @@
           <div class='day-number' data-day='<%= dayNumber %>'>
             <%= dayNumber++ %>
           </div>
+          <div class='priority-bars'>
+            <span class='low-bar'></span>
+            <span class='medium-bar'></span>
+            <span class='high-bar'></span>
+          </div>
         <% } %>
       </div>
     <!-- monday --->
@@ -113,6 +118,11 @@
         <% if(dateStarted  && dayNumber < date_end+1){ %>
           <div class='day-number' data-day='<%= dayNumber %>'>
             <%= dayNumber++ %>
+          </div>
+          <div class='priority-bars'>
+            <span class='low-bar'></span>
+            <span class='medium-bar'></span>
+            <span class='high-bar'></span>
           </div>
         <% } %>
       </div>
@@ -126,6 +136,11 @@
           <div class='day-number' data-day='<%= dayNumber %>'>
             <%= dayNumber++ %>
           </div>
+          <div class='priority-bars'>
+            <span class='low-bar'></span>
+            <span class='medium-bar'></span>
+            <span class='high-bar'></span>
+          </div>
         <% } %>
       </div>
     <!-- wednesday --->
@@ -137,6 +152,11 @@
         <% if(dateStarted  && dayNumber < date_end+1){ %>
           <div class='day-number' data-day='<%= dayNumber %>'>
             <%= dayNumber++ %>
+          </div>
+          <div class='priority-bars'>
+            <span class='low-bar'></span>
+            <span class='medium-bar'></span>
+            <span class='high-bar'></span>
           </div>
         <% } %>
       </div>
@@ -150,6 +170,11 @@
           <div class='day-number' data-day='<%= dayNumber %>'>
             <%= dayNumber++ %>
           </div>
+          <div class='priority-bars'>
+            <span class='low-bar'></span>
+            <span class='medium-bar'></span>
+            <span class='high-bar'></span>
+          </div>
         <% } %>
       </div>
     <!-- friday --->
@@ -161,6 +186,11 @@
         <% if(dateStarted  && dayNumber < date_end+1){ %>
           <div class='day-number' data-day='<%= dayNumber %>'>
             <%= dayNumber++ %>
+          </div>
+          <div class='priority-bars'>
+            <span class='low-bar'></span>
+            <span class='medium-bar'></span>
+            <span class='high-bar'></span>
           </div>
         <% } %>
       </div>
@@ -174,6 +204,11 @@
           <div class='day-number' data-day='<%= dayNumber %>'>
             <%= dayNumber++ %>
           </div>
+          <div class='priority-bars'>
+            <span class='low-bar'></span>
+            <span class='medium-bar'></span>
+            <span class='high-bar'></span>
+          </div>
         <% } %>
       </div>
     <% }else if(total%9 == 8){ %>
@@ -181,5 +216,23 @@
       </div>
     <% } %>
   <% } %>
+  <!-- ummm this is all the events (i should maybe store it somewhere else) -->
+  <!-- also some data is being repeated like month and year, that should be known or assumed-->
+  <div class='data-events'>
+    <% for(var d=0; d < events.length; d++){ %>
+      <div class='single-event'
+        data-evetyear=<%= events[d]['year'] %>
+        data-month=<%= events[d]['month'] %>
+        data-eventday=<%= events[d]['day'] %>
+        data-hourStart=<%= events[d]['hourstart'] %>
+        data-minStart=<%= events[d]['minstart'] %>
+        data-hourEnd=<%= events[d]['hourend'] %>
+        data-minEnd=<%= events[d]['minend'] %>
+        data-priority=<%= events[d]['priority'] %>
+        data-description=<%= events[d]['description'] %>
+        >
+      </div>
+    <% } %>
+  </div>
 </body>
 </html>

@@ -29,14 +29,21 @@
 }
 
 .date{
+  background-color: #e8e8e8;
   min-height: 50px;
   display: flex;
+  padding: 0;
 }
-.date .day-number{
-  margin-left: -10px;
+.day-number{
+  position: absolute;
+  background: #e8e8e8;
+  padding: 0 5px;
 }
 .date:hover{
   cursor: pointer;
+}
+.no-date{
+  background-color: #cecece;
 }
 .day:hover, .no-date:hover{
   cursor: default;
@@ -77,4 +84,28 @@
 .time-form .form-control{
   display: inline-block;
   width: inherit;
+}
+
+.data-events{
+  display: none;
+}
+
+.priority-bars{
+  width: 100%;
+  height: 100%;
+}
+.priority-bars .low-bar{
+  background-color: green;
+}
+.priority-bars .medium-bar{
+  background-color: yellow;
+}
+.priority-bars .high-bar{
+  background-color: red;
+}
+.low-bar, .medium-bar, .high-bar{
+  display: block;
+  margin: 0;
+  width: 100%;
+  height: 0;
 }

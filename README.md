@@ -7,7 +7,7 @@ Must Have Specs
 - HTML rendered client side
 - Click on a day box, and be able to create a new event on that day which gets sent to the backend on clicking submit.
    - ~~The form should have start time, end time, description and submit.~~
-   - Once submit is clicked the form should disappear.
+   - ~~Once submit is clicked the form should disappear.~~
    - Event should now appear in that day’s box.
    - Events cannot span multiple days. Must start and end the same day.
 - Show all events the user has on their calendar.
@@ -27,8 +27,8 @@ BACK END
 Build the backend of the calendar application. The API for the calendar should be the following:
 
 Events (Minimum Required API)
-- POST /events
-  - Should create an event
+- ~~POST /events~~
+  - ~~Should create an event~~
 -  GET /events
   - Should return all events
 
