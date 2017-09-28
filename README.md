@@ -2,13 +2,20 @@
 Calendar for TTP question: uses postgres, javascript, ejs templating, bootstrap, and css (I think that's it)
 
 ### How to use
+Before install:
+- Need postgres database
+- env var  DATABASE_URL
+- env var PORT
+
+...
 1. In terminal
 ```bash
-node install
+npm install
 node start
 ```
 2. go to http://localhost:8080
 3. thats it........
+4. or just go to https://calendarttp.herokuapp.com
 
 ##### UI and stuff
 - to switch month or year click on month or year
