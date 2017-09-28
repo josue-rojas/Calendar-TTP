@@ -107,6 +107,16 @@ $( document ).ready(function() {
 });
 
 // --------------------- funtions (clicks and such) --------------------------
+function changeCal(){
+  window.location = ('/date?month=' + monthToIndex[$('#month-change').find(':selected').text()] + '&year=' + $('#year-change').find(':selected').text()).replace(' ', '')
+}
+function showChooser(show=true){
+  if(show) {
+    $('.calendar-wrapper .month-name').addClass('show-chooser')
+    return
+  }
+  $('.calendar-wrapper .month-name').removeClass('show-chooser')
+}
 function cancelNew(){
   $('.events-table-wrapper').removeClass('show-events')
   $('.calendar-wrapper').removeClass('hide-calendar')
@@ -166,13 +176,13 @@ function eventsStuff(target){
     <div class="col-md-1"></div> \
     <div class="col-md-1 events-table-cell">'
     + $singleEvent.data('hourstart')
-    + ' :'
-    + $singleEvent.data('minstart')
+    + ':'
+    + ($singleEvent.data('minstart') > 9 ? $singleEvent.data('minstart') : ( '0' + $singleEvent.data('minstart')) )
     +' </div> \
     <div class="col-md-1 events-table-cell">'
     + $singleEvent.data('hourend')
-    + ' :'
-    + $singleEvent.data('minend')
+    + ':'
+    + ($singleEvent.data('minend') > 9 ? $singleEvent.data('minend') : ( '0' + $singleEvent.data('minend')) )
     + '</div>\
     <div class="col-md-1 events-table-cell priority-cell">\
     <div class="'
@@ -201,19 +211,32 @@ function eventsStuff(target){
   $('.calendar-wrapper').addClass('hide-calendar')
 }
 
+function checkTimes(hS, mS, hE, mE){
+  if(hS < hE || (hS == hE && mS < mE)) return true
+  return false
+}
+
 // --------------------- api requests --------------------------
 // api calls
 //update or add new events
 function submitNew(id=curID){
+  hourStart=parseInt($("#hour-start").find(':selected').text())
+  minStart=parseInt($("#min-start").find(':selected').text())
+  hourEnd=parseInt($("#hour-end").find(':selected').text())
+  minEnd=parseInt($("#min-end").find(':selected').text())
+  if(!checkTimes(hourStart, minStart, hourEnd, minEnd)){
+    alert("Time Doesn't Makes Sense!!")
+    return
+  }
   newData = {
     'year': year,
     'monthNum': monthToIndex[month],
     'month': month,
     'day': day,
-    'hourStart':parseInt($("#hour-start").find(':selected').text()),
-    'minStart': parseInt($("#min-start").find(':selected').text()),
-    'hourEnd':parseInt($("#hour-end").find(':selected').text()),
-    'minEnd': parseInt($("#min-end").find(':selected').text()),
+    'hourStart':hourStart,
+    'minStart': minStart,
+    'hourEnd': hourEnd,
+    'minEnd': minEnd,
     'description': $('#description').val(),
     'priority': parseInt(priority)
   }

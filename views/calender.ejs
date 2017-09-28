@@ -50,7 +50,7 @@
         </select>
         :
         <select class="form-control min-start" id="min-start">
-          <% for(var h = 0; h < 59; h++){ %>
+          <% for(var h = 0; h < 60; h++){ %>
             <option value=<%= h %>><% if(h < 10) {%>0<% } %><%= h %></option>
           <% } %>
         </select>
@@ -62,7 +62,7 @@
         </select>
         :
         <select class="form-control min-end" id="min-end">
-          <% for(var h = 0; h < 59; h++){ %>
+          <% for(var h = 0; h < 60; h++){ %>
             <option value=<%= h %>><% if(h < 10) {%>0<% } %><%= h %></option>
           <% } %>
         </select>
@@ -90,7 +90,37 @@
   <div class='calendar-wrapper'>
   <div class="row">
     <div class="col-md-1"></div>
-    <div class="col-md-7 month-name "><%= thisMonth %></div>
+    <div class="col-md-7 month-name">
+      <div class='cal-month'>
+        <div class='month-chooser-wrap'>
+          <select class='form-control month-chooser' id='month-change' >>
+          <% months=['January','February', 'March', 'April', 'May', 'June', 'July', 'August','September','October','November','December'] %>
+          <% for(var m = 0; m < months.length; m++) { %>
+            <option value=<%= months[m] %><% if(thisMonth == months[m]) { %> selected <% } %>><%= months[m] %></option>
+          <% } %>
+          </select>
+        </div>
+        <div class='month-text' onclick='showChooser()'>
+          <%= thisMonth %>
+        </div>
+      </div>
+      <div class='cal-year'>
+        <div class='year-chooser-wrap'>
+          <select class='form-control year-chooser' id='year-change' >>
+          <% for(var y = thisYear-5; y < thisYear+5; y++) { %>
+            <option value=<%= y %> <% if(thisYear == y) { %> selected <% } %>> <%= y%> </option>
+          <% } %>
+          </select>
+        </div>
+        <div class='year-text' onclick='showChooser()'>
+          <%= thisYear %>
+        </div>
+      </div>
+      <div class='cal-button-chooser'>
+        <button class='btn btn-primary' onclick='changeCal()'>Go</button>
+        <button class='btn btn-info' onclick='showChooser(false)'>Cancel</button>
+      </div>
+    </div>
     <div class="col-md-1"></div>
   </div>
   <!-- Name of days -->
@@ -238,14 +268,14 @@
     <% } %>
   <% } %>
 </div>
-  <!-- ummm this is all the events (i should maybe store it somewhere else) -->
-  <!-- also some data is being repeated like month and year, that should be known or assumed-->
+  <!-- ummm this is all the events (i should maybe store it somewhere else) maybe i should request it when viewing the day and here just request the priorities, and days, then delete year and month cause that is repetetive -->
+  <!-- also some data is being repeated like month and year, that should be known or assumed -->
   <div class='data-events'>
     <% priorities = {"0": "low", "1": "medium", "2": "high"}%>
     <% for(var d=0; d < events.length; d++){ %>
       <div class='single-event'
         data-id=<%= events[d]['id'] %>
-        data-evetyear=<%= events[d]['year'] %>
+        data-eventyear=<%= events[d]['year'] %>
         data-month=<%= events[d]['month'] %>
         data-eventday=<%= events[d]['day'] %>
         data-hourstart=<%= events[d]['hourstart'] %>
