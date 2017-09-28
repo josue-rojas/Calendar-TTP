@@ -100,9 +100,9 @@ $( document ).ready(function() {
     lowPerc = (lowT / total) * 100
     medPerc = (mediumT / total) * 100
     highPerc = (highT / total) * 100
-    $($days[d]).find('.low-bar').css('height', lowPerc + '%')
-    $($days[d]).find('.medium-bar').css('height', medPerc + '%')
-    $($days[d]).find('.high-bar').css('height', highPerc + '%')
+    $($days[d]).find('.low-bar').css('width', lowPerc + '%')
+    $($days[d]).find('.medium-bar').css('width', medPerc + '%')
+    $($days[d]).find('.high-bar').css('width', highPerc + '%')
   }
 });
 
