@@ -18,8 +18,8 @@ Optional Specs (Not required; bonus points available for inclusion of one or mor
 - Switch between months
 - Week or day view
 - Handle events spanning multiple days
-- Handle too many events to fit in your box UI on a given day.
-- You should be able to update/delete events. How you implement this UX is up to you.
+- ~~Handle too many events to fit in your box UI on a given day.~~ (kinda done?)
+- ~~You should be able to update/delete events. How you implement this UX is up to you.~~
 - ~~The UI should have 5 rows of 7 boxes with the correct date on the correct days.~~
 
 
@@ -35,5 +35,5 @@ Events (Minimum Required API)
 Events (Optional API. Not required; bonus points available)
 - ~~DELETE /events/:id~~
   - ~~Should delete an event~~
-- PUT /events/:id
-  - Should update an existing event
+- ~~PUT /events/:id~~
+  - ~~Should update an existing event~~
