@@ -45,33 +45,33 @@
         <label for="time-start">Time Start</label>
         <select class="form-control hour-start" id="hour-start">
           <% for(var h = 0; h < 24; h++){ %>
-            <option><%= h %></option>
+            <option value=<%= h %>><%= h %></option>
           <% } %>
         </select>
         :
         <select class="form-control min-start" id="min-start">
           <% for(var h = 0; h < 59; h++){ %>
-            <option><% if(h < 10) {%>0<% } %><%= h %></option>
+            <option value=<%= h %>><% if(h < 10) {%>0<% } %><%= h %></option>
           <% } %>
         </select>
         <label for="time-end">Time End</label>
         <select class="form-control hour-end" id="hour-end">
           <% for(var h = 0; h < 24; h++){ %>
-            <option><%= h %></option>
+            <option value=<%= h %>><%= h %></option>
           <% } %>
         </select>
         :
         <select class="form-control min-end" id="min-end">
           <% for(var h = 0; h < 59; h++){ %>
-            <option><% if(h < 10) {%>0<% } %><%= h %></option>
+            <option value=<%= h %>><% if(h < 10) {%>0<% } %><%= h %></option>
           <% } %>
         </select>
       </div>
       <!-- priority buttons -->
       <div class='priority-buttons'>
-        <button class='btn btn-success disabled priority' data-priority=0>Low</button>
-        <button class='btn btn-warning priority' data-priority=1>Medium</button>
-        <button class='btn btn-danger priority' data-priority=2>High</button>
+        <button class='btn btn-success disabled priority' data-priority=0 id='low'>Low</button>
+        <button class='btn btn-warning priority' data-priority=1 id='medium'>Medium</button>
+        <button class='btn btn-danger priority' data-priority=2 id='high'>High</button>
       </div>
       <!-- description -->
       <div class="form-group">
@@ -80,8 +80,8 @@
       </div>
       <!-- submit buttons -->
       <div class='submit-buttons'>
-        <button class="btn btn-primary" type="submit" onclick='submitNew()'>Submit</button>
-        <button class="btn btn-primary" type="submit" onclick='cancelNew()'>Cancel</button>
+        <button class="btn btn-outline-primary" type="submit" onclick='submitNew()'>Submit</button>
+        <button class="btn btn-outline-warning" type="submit" onclick='cancelNew()'>Cancel</button>
       </div>
     </div>
     <div class="col-md-1"></div>
@@ -248,10 +248,10 @@
         data-evetyear=<%= events[d]['year'] %>
         data-month=<%= events[d]['month'] %>
         data-eventday=<%= events[d]['day'] %>
-        data-hourStart=<%= events[d]['hourstart'] %>
-        data-minStart=<%= events[d]['minstart'] %>
-        data-hourEnd=<%= events[d]['hourend'] %>
-        data-minEnd=<%= events[d]['minend'] %>
+        data-hourstart=<%= events[d]['hourstart'] %>
+        data-minstart=<%= events[d]['minstart'] %>
+        data-hourend=<%= events[d]['hourend'] %>
+        data-minend=<%= events[d]['minend'] %>
         data-priority=<%= priorities[events[d]['priority']] %>
         data-description="<%= events[d]['description'] %>"
         >

@@ -1,3 +1,10 @@
+.body{
+  background-color: black;
+  color: white;
+}
+.day,.month-name{
+  background-color: grey;
+}
 /*change defaults*/
 .row{
   width: 100vw;
@@ -24,6 +31,9 @@
 .day,.date,.month-name{
   border: solid 1px black;
   text-align: center;
+}
+.date, .events-table-cell, .stuff{
+  color: black;
 }
 
 .month-name{

@@ -40,8 +40,8 @@ const lastRow = "\
   <div class='col-md-1'></div>\
   <div class='col-md-7 events-table-cell'>\
     <div class='extra-buttons'>\
-      <button class='btn btn-info' onclick='showForm()'>New</button>\
-      <button class='btn btn-success' onclick='cancelNew()'>Cancel</button>\
+      <button class='btn btn-outline-info' onclick='showForm()'>New</button>\
+      <button class='btn btn-outline-warning' onclick='cancelNew()'>Cancel</button>\
     </div>\
   </div>\
   <div class='col-md-1'></div></div>\
@@ -114,16 +114,42 @@ function cancelNew(){
 }
 //this will set the priority
 function disableButton(target){
+  console.log(target)
   $('.btn.priority').removeClass('disabled')
   $(target).addClass('disabled')
   priority = $(target).data('priority')
 }
 
-function showForm(){
+function showForm(id=-1){
+  curID = id
+  if(id > -1){
+    $eventData = $('[data-id='+id+']')
+    $('#description').val($eventData.data('description'))
+    $('#hour-start').val($eventData.data('hourstart'))
+    $('#min-start').val($eventData.data('minstart'))
+    $('#hour-end').val($eventData.data('hourend'))
+    $('#min-end').val($eventData.data('minend'))
+    disableButton('#'+$($eventData).data('priority'))
+
+  }
+  else{
+    // set defaults
+    $('#description').val('')
+    $('#hour-start').val(0)
+    $('#min-start').val(0)
+    $('#hour-end').val(0)
+    $('#min-end').val(0)
+    disableButton('#low')
+  }
   cancelNew()
   $('.calendar-wrapper').addClass('hide-calendar')
   $('.row.events').find('.events-date').text(month + ' ' + day + ', ' + year)
   $('.row.events').addClass('show')
+}
+
+// need to remove this
+function editEvent(id){
+  showForm(id)
 }
 
 // to show events and forms
@@ -157,11 +183,11 @@ function eventsStuff(target){
     +'</div> \
     <div class="col-md-2 events-table-cell">'
     + "<div class='event-buttons'>\
-      <button class='btn btn-success disabled' onclick=editEvent("
+      <button class='btn btn-outline-success' onclick=editEvent("
       + $singleEvent.data('id')
       +")>Edit\
       </button>\
-      <button class='btn btn-warning' onclick='deleteEvent("
+      <button class='btn btn-outline-danger' onclick='deleteEvent("
       + $singleEvent.data('id')
       +")'>Delete</button>\
     </div>"
@@ -177,7 +203,8 @@ function eventsStuff(target){
 
 // --------------------- api requests --------------------------
 // api calls
-function submitNew(){
+//update or add new events
+function submitNew(id=curID){
   newData = {
     'year': year,
     'monthNum': monthToIndex[month],
@@ -192,7 +219,7 @@ function submitNew(){
   }
   $.ajax({
     type:'POST',
-    url:'/events',
+    url:id==-1 ? '/events': '/events/'+id,
     datatype:'json',
     contentType: 'application/json',
     data: JSON.stringify(newData),
@@ -202,6 +229,7 @@ function submitNew(){
   })
 }
 
+//delete events
 function deleteEvent(curID){
   $.ajax({
     type:'DELETE',
