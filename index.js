@@ -51,7 +51,7 @@ app.get('/', (req, res, next) => {
   thisYear = (new Date()).getFullYear()
   pool.query('SELECT * FROM events WHERE year='+ thisYear +' and monthNum='+thisMonth)
   .then(results => {
-    res.render('calender', {date_end:LastDayOfMonth(thisYear, thisMonth), date_name_start:FirsDayNameOfMonth(thisYear, thisMonth), thisMonth:indexToMonth[thisMonth], year:thisYear, events:results.rows});})
+    res.render('calender', {date_end:LastDayOfMonth(thisYear, thisMonth), date_name_start:FirsDayNameOfMonth(thisYear, thisMonth), thisMonth:indexToMonth[thisMonth], thisYear:thisYear, events:results.rows});})
   .catch(e => console.error(e.stack))
 })
 
@@ -59,10 +59,10 @@ app.get('/', (req, res, next) => {
 // SHOULD FIX TO NOT START AT 0
 app.get('/date', (req, res) => {
   thisMonth =  !req.query.month ? (new Date()).getMonth() : req.query.month
-  thisYear = !req.query.year ? (new Date()).getFullYear() : req.query.year
+  thisYear = !req.query.year ? (new Date()).getFullYear() : parseInt(req.query.year)
   pool.query('SELECT * FROM events WHERE year='+ thisYear +' and monthNum='+thisMonth)
   .then(results => {
-    res.render('calender', {date_end:LastDayOfMonth(thisYear, thisMonth), date_name_start:FirsDayNameOfMonth(thisYear, thisMonth), thisMonth:indexToMonth[thisMonth], year:thisYear, events:results.rows});})
+    res.render('calender', {date_end:LastDayOfMonth(thisYear, thisMonth), date_name_start:FirsDayNameOfMonth(thisYear, thisMonth), thisMonth:indexToMonth[thisMonth], thisYear:thisYear, events:results.rows});})
   .catch(e => console.error(e.stack))
 })
 
