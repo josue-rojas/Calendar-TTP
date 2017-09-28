@@ -16,7 +16,26 @@
   <title>Calendar <%= thisMonth %> <%= thisYear %></title>
 </head>
 <body class='body' data-month='<%= thisMonth %>' data-year='<%= thisYear %>'>
-  <!-- events and form row -->
+  <!-- events table -->
+  <div class='events-table-wrapper'>
+    <div class='row'>
+      <div class="col-md-1"></div>
+      <div class='col-md-7 events-table-cell month-name'>
+        <div class='events-date'></div>
+      </div>
+      <div class="col-md-1"></div>
+    </div>
+    <div class='row events-table'>
+      <div class="col-md-1"></div>
+      <div class="col-md-1 events-table-cell">Start</div>
+      <div class="col-md-1 events-table-cell">End</div>
+      <div class="col-md-1 events-table-cell">Priority</div>
+      <div class="col-md-2 events-table-cell">Description</div>
+      <div class="col-md-2 events-table-cell"></div>
+      <div class="col-md-1"></div>
+    </div>
+  </div>
+  <!-- form row -->
   <div class='row events'>
     <div class="col-md-1"></div>
     <div class="col-md-7 stuff">
@@ -62,11 +81,13 @@
       <!-- submit buttons -->
       <div class='submit-buttons'>
         <button class="btn btn-primary" type="submit" onclick='submitNew()'>Submit</button>
+        <button class="btn btn-primary" type="submit" onclick='cancelNew()'>Cancel</button>
       </div>
     </div>
     <div class="col-md-1"></div>
   </div>
   <!-- month -->
+  <div class='calendar-wrapper'>
   <div class="row">
     <div class="col-md-1"></div>
     <div class="col-md-7 month-name "><%= thisMonth %></div>
@@ -216,11 +237,14 @@
       </div>
     <% } %>
   <% } %>
+</div>
   <!-- ummm this is all the events (i should maybe store it somewhere else) -->
   <!-- also some data is being repeated like month and year, that should be known or assumed-->
   <div class='data-events'>
+    <% priorities = {"0": "low", "1": "medium", "2": "high"}%>
     <% for(var d=0; d < events.length; d++){ %>
       <div class='single-event'
+        data-id=<%= events[d]['id'] %>
         data-evetyear=<%= events[d]['year'] %>
         data-month=<%= events[d]['month'] %>
         data-eventday=<%= events[d]['day'] %>
@@ -228,8 +252,8 @@
         data-minStart=<%= events[d]['minstart'] %>
         data-hourEnd=<%= events[d]['hourend'] %>
         data-minEnd=<%= events[d]['minend'] %>
-        data-priority=<%= events[d]['priority'] %>
-        data-description=<%= events[d]['description'] %>
+        data-priority=<%= priorities[events[d]['priority']] %>
+        data-description="<%= events[d]['description'] %>"
         >
       </div>
     <% } %>
