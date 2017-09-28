@@ -1,7 +1,24 @@
 # CalenderTTP
 Calendar for TTP question: uses postgres, javascript, ejs templating, bootstrap, and css (I think that's it)
 
-Must Have Specs
+### How to use
+1. In terminal
+```bash
+node install
+node start
+```
+2. go to http://localhost:8080
+3. thats it........
+
+##### UI and stuff
+- to switch month or year click on month or year
+- to view events click on day
+- to add event click on day then click new
+- to edit event click edit
+- to update event click update on event row
+- ...etc for others that have buttons
+
+<!-- Must Have Specs
 - ~~The UI should have one month hard coded view (Pick any month)~~
 - ~~Ignore users/login, just have one hardcoded user~~
 - ~~HTML rendered client side~~
@@ -36,4 +53,4 @@ Events (Optional API. Not required; bonus points available)
 - ~~DELETE /events/:id~~
   - ~~Should delete an event~~
 - ~~PUT /events/:id~~
-  - ~~Should update an existing event~~
+  - ~~Should update an existing event~~ -->
