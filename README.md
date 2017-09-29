@@ -22,7 +22,6 @@ node start
 - to view events click on day
 - to add event click on day then click new
 - to edit event click edit
-- to update event click update on event row
 - ...etc for others that have buttons
 
 <!-- Must Have Specs
