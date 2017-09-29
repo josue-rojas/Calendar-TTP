@@ -165,7 +165,7 @@
 
   <% dateStarted = false %>
   <% dayNumber = 1 %>
-  <% if(date_name_start == 6){ totalCell = 54 } else{ totalCell = 45} %>
+  <% totalCell = Math.ceil((date_name_start + date_end)/7) * 9 %>
   <% for(total=0; total < totalCell; total++){%>
     <% if(total%9 == 0){ %>
       <div class="row">
