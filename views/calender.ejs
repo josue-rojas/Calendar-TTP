@@ -36,142 +36,145 @@
     </div>
   </div>
   <!-- form row -->
-  <div class='row events'>
-    <div class="col-md-1"></div>
-    <div class="col-md-7 stuff">
-      <!-- date -->
-      <div class='events-date'></div>
-      <div class="form-group time-form">
-        <label for="time-start">Time Start</label>
-        <select class="form-control hour-start" id="hour-start">
-          <% for(var h = 0; h < 24; h++){ %>
-            <option value=<%= h %>><%= h %></option>
-          <% } %>
-        </select>
-        :
-        <select class="form-control min-start" id="min-start">
-          <% for(var h = 0; h < 60; h++){ %>
-            <option value=<%= h %>><% if(h < 10) {%>0<% } %><%= h %></option>
-          <% } %>
-        </select>
-        <label for="time-end">Time End</label>
-        <select class="form-control hour-end" id="hour-end">
-          <% for(var h = 0; h < 24; h++){ %>
-            <option value=<%= h %>><%= h %></option>
-          <% } %>
-        </select>
-        :
-        <select class="form-control min-end" id="min-end">
-          <% for(var h = 0; h < 60; h++){ %>
-            <option value=<%= h %>><% if(h < 10) {%>0<% } %><%= h %></option>
-          <% } %>
-        </select>
+  <div class='events-form-wrapper'>
+    <div class='row events events-form'>
+      <div class="col-md-1"></div>
+      <div class="col-md-7 stuff">
+        <!-- date -->
+        <div class='events-date'></div>
+        <div class="form-group time-form">
+          <label for="time-start">Time Start</label>
+          <select class="form-control hour-start" id="hour-start">
+            <% for(var h = 0; h < 24; h++){ %>
+              <option value=<%= h %>><%= h %></option>
+            <% } %>
+          </select>
+            :
+          <select class="form-control min-start" id="min-start">
+            <% for(var h = 0; h < 60; h++){ %>
+              <option value=<%= h %>><% if(h < 10) {%>0<% } %><%= h %></option>
+            <% } %>
+          </select>
+          <label for="time-end">Time End</label>
+          <select class="form-control hour-end" id="hour-end">
+            <% for(var h = 0; h < 24; h++){ %>
+              <option value=<%= h %>><%= h %></option>
+            <% } %>
+          </select>
+            :
+          <select class="form-control min-end" id="min-end">
+            <% for(var h = 0; h < 60; h++){ %>
+              <option value=<%= h %>><% if(h < 10) {%>0<% } %><%= h %></option>
+            <% } %>
+          </select>
+        </div>
+        <!-- priority buttons -->
+        <div class='priority-buttons'>
+          <button class='btn btn-success disabled priority' data-priority=0 id='low'>Low</button>
+          <button class='btn btn-warning priority' data-priority=1 id='medium'>Medium</button>
+          <button class='btn btn-danger priority' data-priority=2 id='high'>High</button>
+        </div>
+        <!-- description -->
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea class="form-control" id="description" rows="3"></textarea>
+        </div>
+        <!-- submit buttons -->
+        <div class='submit-buttons'>
+          <button class="btn btn-outline-primary" type="submit" onclick='submitNew()'>Submit</button>
+          <button class="btn btn-outline-warning" type="submit" onclick='switchView(".events-form-wrapper", ".calendar-wrapper")'>Cancel</button>
+        </div>
       </div>
-      <!-- priority buttons -->
-      <div class='priority-buttons'>
-        <button class='btn btn-success disabled priority' data-priority=0 id='low'>Low</button>
-        <button class='btn btn-warning priority' data-priority=1 id='medium'>Medium</button>
-        <button class='btn btn-danger priority' data-priority=2 id='high'>High</button>
-      </div>
-      <!-- description -->
-      <div class="form-group">
-        <label for="description">Description</label>
-        <textarea class="form-control" id="description" rows="3"></textarea>
-      </div>
-      <!-- submit buttons -->
-      <div class='submit-buttons'>
-        <button class="btn btn-outline-primary" type="submit" onclick='submitNew()'>Submit</button>
-        <button class="btn btn-outline-warning" type="submit" onclick='cancelNew()'>Cancel</button>
-      </div>
+      <div class="col-md-1"></div>
     </div>
-    <div class="col-md-1"></div>
   </div>
   <!-- month -->
   <div class='calendar-wrapper'>
-  <div class="row">
-    <div class="col-md-1"></div>
-    <div class="col-md-7 month-name">
-      <div class='cal-month'>
-        <div class='month-chooser-wrap'>
-          <select class='form-control month-chooser' id='month-change' >>
-          <% months=['January','February', 'March', 'April', 'May', 'June', 'July', 'August','September','October','November','December'] %>
-          <% for(var m = 0; m < months.length; m++) { %>
-            <option value=<%= months[m] %><% if(thisMonth == months[m]) { %> selected <% } %>><%= months[m] %></option>
-          <% } %>
-          </select>
-        </div>
-        <div class='month-text' onclick='showChooser()'>
-          <%= thisMonth %>
-        </div>
-      </div>
-      <div class='cal-year'>
-        <div class='year-chooser-wrap'>
-          <select class='form-control year-chooser' id='year-change' >>
-          <% for(var y = thisYear-5; y < thisYear+5; y++) { %>
-            <option value=<%= y %> <% if(thisYear == y) { %> selected <% } %>> <%= y%> </option>
-          <% } %>
-          </select>
-        </div>
-        <div class='year-text' onclick='showChooser()'>
-          <%= thisYear %>
-        </div>
-      </div>
-      <div class='cal-button-chooser'>
-        <button class='btn btn-primary' onclick='changeCal()'>Go</button>
-        <button class='btn btn-info' onclick='showChooser(false)'>Cancel</button>
-      </div>
-    </div>
-    <div class="col-md-1"></div>
-  </div>
-  <!-- Name of days -->
-  <div class="row">
-    <div class="col-md-1"></div>
-    <div class="col-md-1 day">
-      <span class='mobile-name'>S</span>
-      <span class='tablet-name'>Sun</span>
-      <span class='desktop-name'>Sunday</span>
-    </div>
-    <div class="col-md-1 day">
-      <span class='mobile-name'>M</span>
-      <span class='tablet-name'>Mon</span>
-      <span class='desktop-name'>Monday</span>
-    </div>
-    <div class="col-md-1 day">
-      <span class='mobile-name'>T</span>
-      <span class='tablet-name'>Tue</span>
-      <span class='desktop-name'>Tuesday</span>
-    </div>
-    <div class="col-md-1 day">
-      <span class='mobile-name'>W</span>
-      <span class='tablet-name'>Wed</span>
-      <span class='desktop-name'>Wednesday</span></div>
-    <div class="col-md-1 day">
-      <span class='mobile-name'>T</span>
-      <span class='tablet-name'>Thu</span>
-      <span class='desktop-name'>Thursday</span>
-    </div>
-    <div class="col-md-1 day">
-      <span class='mobile-name'>F</span>
-      <span class='tablet-name'>Fri</span>
-      <span class='desktop-name'>Friday</span>
-    </div>
-    <div class="col-md-1 day">
-      <span class='mobile-name'>S</span>
-      <span class='tablet-name'>Sat</span>
-      <span class='desktop-name'>Saturday</span>
-    </div>
-    <div class="col-md-1"></div>
-  </div>
-
-  <% dateStarted = false %>
-  <% dayNumber = 1 %>
-  <% totalCell = Math.ceil((date_name_start + date_end)/7) * 9 %>
-  <% for(total=0; total < totalCell; total++){%>
-    <% if(total%9 == 0){ %>
-      <div class="row">
+    <div class="row">
       <div class="col-md-1"></div>
-    <!-- sunday --->
-    <% }else if(total%9 == 1){ %>
+      <div class="col-md-7 month-name">
+        <div class='cal-month'>
+          <div class='month-chooser-wrap'>
+            <select class='form-control month-chooser' id='month-change' >
+              <% months=['January','February', 'March', 'April', 'May', 'June', 'July', 'August','September','October','November','December'] %>
+              <% for(var m = 0; m < months.length; m++) { %>
+                <option value=<%= months[m] %><% if(thisMonth == months[m]) { %> selected <% } %>><%= months[m] %></option>
+              <% } %>
+            </select>
+          </div>
+          <div class='month-text' onclick=showChooser()>
+            <%= thisMonth %>
+          </div>
+        </div>
+        <div class='cal-year'>
+          <div class='year-chooser-wrap'>
+            <select class='form-control year-chooser' id='year-change' >
+              <% for(var y = thisYear-5; y < thisYear+5; y++) { %>
+                <option value=<%= y %> <% if(thisYear == y) { %> selected <% } %>> <%= y%> </option>
+              <% } %>
+            </select>
+          </div>
+          <div class='year-text' onclick='showChooser()'>
+            <%= thisYear %>
+          </div>
+        </div>
+        <div class='cal-button-chooser'>
+          <button class='btn btn-primary' onclick='changeCal()'>Go</button>
+          <button class='btn btn-info' onclick='showChooser(false)'>Cancel</button>
+        </div>
+      </div>
+      <div class="col-md-1"></div>
+    </div>
+    <!-- Name of days -->
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-1 day">
+        <span class='mobile-name'>S</span>
+        <span class='tablet-name'>Sun</span>
+        <span class='desktop-name'>Sunday</span>
+      </div>
+      <div class="col-md-1 day">
+        <span class='mobile-name'>M</span>
+        <span class='tablet-name'>Mon</span>
+        <span class='desktop-name'>Monday</span>
+      </div>
+      <div class="col-md-1 day">
+        <span class='mobile-name'>T</span>
+        <span class='tablet-name'>Tue</span>
+        <span class='desktop-name'>Tuesday</span>
+      </div>
+      <div class="col-md-1 day">
+        <span class='mobile-name'>W</span>
+        <span class='tablet-name'>Wed</span>
+        <span class='desktop-name'>Wednesday</span>
+      </div>
+      <div class="col-md-1 day">
+        <span class='mobile-name'>T</span>
+        <span class='tablet-name'>Thu</span>
+        <span class='desktop-name'>Thursday</span>
+      </div>
+      <div class="col-md-1 day">
+        <span class='mobile-name'>F</span>
+        <span class='tablet-name'>Fri</span>
+        <span class='desktop-name'>Friday</span>
+      </div>
+      <div class="col-md-1 day">
+        <span class='mobile-name'>S</span>
+        <span class='tablet-name'>Sat</span>
+        <span class='desktop-name'>Saturday</span>
+      </div>
+      <div class="col-md-1"></div>
+    </div>
+
+    <% dateStarted = false %>
+    <% dayNumber = 1 %>
+    <% totalCell = Math.ceil((date_name_start + date_end)/7) * 9 %>
+    <% for(total=0; total < totalCell; total++){%>
+      <% if(total%9 == 0){ %>
+      <div class="row">
+        <div class="col-md-1"></div>
+          <!-- sunday --->
+      <% }else if(total%9 == 1){ %>
       <div class="col-md-1 date">
         <% if(date_name_start == 0){ %>
           <% dateStarted = true %>

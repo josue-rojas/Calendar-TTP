@@ -41,7 +41,7 @@ const lastRow = "\
   <div class='col-md-7 events-table-cell'>\
     <div class='extra-buttons'>\
       <button class='btn btn-outline-info' onclick='showForm()'>New</button>\
-      <button class='btn btn-outline-warning' onclick='cancelNew()'>Cancel</button>\
+      <button class='btn btn-outline-warning' onclick=switchView('.events-table-wrapper','.calendar-wrapper')>Cancel</button>\
     </div>\
   </div>\
   <div class='col-md-1'></div></div>\
@@ -117,10 +117,12 @@ function showChooser(show=true){
   }
   $('.calendar-wrapper .month-name').removeClass('show-chooser')
 }
-function cancelNew(){
-  $('.events-table-wrapper').removeClass('show-events')
-  $('.calendar-wrapper').removeClass('hide-calendar')
-  $('.row.events').removeClass('show')
+// this switches views
+function switchView(viewHide, viewShow){
+  $(viewHide).fadeOut(150, function(){
+    $(viewShow).fadeIn(200)
+  })
+
 }
 //this will set the priority
 function disableButton(target){
@@ -150,15 +152,8 @@ function showForm(id=-1){
     $('#min-end').val(0)
     disableButton('#low')
   }
-  cancelNew()
-  $('.calendar-wrapper').addClass('hide-calendar')
   $('.row.events').find('.events-date').text(month + ' ' + day + ', ' + year)
-  $('.row.events').addClass('show')
-}
-
-// need to remove this
-function editEvent(id){
-  showForm(id)
+  switchView('.events-table-wrapper', '.events-form-wrapper')
 }
 
 // to show events and forms
@@ -192,7 +187,7 @@ function eventsStuff(target){
     +'</div> \
     <div class="col-md-2 events-table-cell">'
     + "<div class='event-buttons'>\
-      <button class='btn btn-outline-success' onclick=editEvent("
+      <button class='btn btn-outline-success' onclick=showForm("
       + $singleEvent.data('id')
       +")>Edit\
       </button>\
@@ -206,8 +201,7 @@ function eventsStuff(target){
   }
   $('.events-table-wrapper').append(html)
   $('.events-table-wrapper').append(lastRow)
-  $events.addClass('show-events')
-  $('.calendar-wrapper').addClass('hide-calendar')
+  switchView('.calendar-wrapper', '.events-table-wrapper')
 }
 
 function checkTimes(hS, mS, hE, mE){

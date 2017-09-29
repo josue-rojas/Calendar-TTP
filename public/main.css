@@ -36,6 +36,10 @@
   color: black;
 }
 
+.events-table-wrapper, .events-form-wrapper{
+  display: none;
+}
+
 
 .month-name{
   font-size: 30px;
@@ -65,10 +69,6 @@
   cursor: default;
 }
 
-.events{
-  display: none;
-  position: absolute;
-}
 .events .stuff, .events-table-cell{
   border: solid 1px black;
   background-color:  #e8e8e8;;
@@ -142,17 +142,7 @@
   height: 50px;
   margin: auto;
 }
-.hide-calendar{
-  display: none;
-}
-.events-table-wrapper{
-  z-index: 1000000;
-  display: none;
-  position: absolute;
-}
-.events-table-wrapper.show-events{
-  display: block;
-}
+
 .extra-buttons{
   display: flex;
   justify-content: center;
