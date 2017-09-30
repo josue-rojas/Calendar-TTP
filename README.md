@@ -17,7 +17,55 @@ node start
 3. thats it........
 4. or just go to https://calendarttp.herokuapp.com
 
-##### UI and stuff
+### endpoints
+#### GET
+-  __/events__
+  ```bash
+  # example
+  # returns all events from all months and years
+   curl -X 'GET' https://calendarttp.herokuapp.com/events
+  ```
+- __/events/:id__
+  ```bash
+  # example
+  # returns single event with that id
+  curl -X 'GET' https://calendarttp.herokuapp.com/events/30
+  ```
+- __/events/q?year=(year)&month=(name of month)&monthN=(month num-1)&day=(day)&hours=(hour start)&mins=(min start)&houre=(hour end)&mine=(min end)&priority=(priority)&description=(description)__
+  ```bash
+  # example
+  # this is more specific query which you can leave some blank
+  # returns all events in 2017
+  curl -X 'GET' https://calendarttp.herokuapp.com/events/q?year=2017
+  # returns all events with month 8 (September)
+  curl -X 'GET' https://calendarttp.herokuapp.com/events/q?monthN=8
+  # returns all events on September 1, 2017
+  curl -X 'GET' https://calendarttp.herokuapp.com/events/q?month=September&year=2017&day=1
+  # returns all events with high priority
+  # (low -> 0, medium -> 1, high -> 2)
+  curl -X 'GET' https://calendarttp.herokuapp.com/events/q?priority=2
+  ```
+
+#### POST
+- __/events__
+  ```bash
+  # note: this doesnt check if month num or name is right or if the time is right (basically you can post anything as long as it fits the datatype)...
+  # example   
+   curl -H "Content-Type: application/json" -X 'POST' https://calendarttp.herokuapp.com/events -d '{"year": 2017, "monthNum": 8, "month": "September", "day": 1, "hourStart": 0, "minStart": 0, "hourEnd": 1, "minEnd": 0, "priority": 2, "description":"send another event"}'
+  ```
+- __/events/:id__
+  ```bash
+  # note: this doesnt check if month num or name is right or if the time is right (basically you can post anything as long as it fits the datatype)...
+  # example   
+   curl -H "Content-Type: application/json" -X 'POST' https://calendarttp.herokuapp.com/events/35 -d '{"year": 2017, "monthNum": 8, "month": "September", "day": 1, "hourStart": 0, "minStart": 0, "hourEnd": 1, "minEnd": 0, "priority": 2, "description":"edit this event"}'
+ ```
+#### DELETE
+  ```bash
+  #example
+  curl -X 'DELETE' https://calendarttp.herokuapp.com/events/35
+  ```
+
+### UI and stuff
 - to switch month or year click on month or year
 - to view events click on day
 - to add event click on day then click new
