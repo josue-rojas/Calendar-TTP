@@ -60,7 +60,7 @@ __/events/:id__
    curl -H "Content-Type: application/json" -X 'POST' https://calendarttp.herokuapp.com/events/35 -d '{"year": 2017, "monthNum": 8, "month": "September", "day": 1, "hourStart": 0, "minStart": 0, "hourEnd": 1, "minEnd": 0, "priority": 2, "description":"edit this event"}'
  ```
 #### DELETE
-__/events:id__
+__/events/:id__
   ```bash
   #example
   curl -X 'DELETE' https://calendarttp.herokuapp.com/events/35
