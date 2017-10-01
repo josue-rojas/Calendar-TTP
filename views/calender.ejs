@@ -41,7 +41,24 @@
       <div class="col-md-1"></div>
       <div class="col-md-7 stuff">
         <!-- date -->
-        <div class='events-date'></div>
+        <div class='date-form'>
+          <select class='form-control month-form' id='month-form' >
+          <% months=['January','February', 'March', 'April', 'May', 'June', 'July', 'August','September','October','November','December'] %>
+          <% for(var m = 0; m < months.length; m++) { %>
+            <option value=<%= months[m] %><% if(thisMonth == months[m]) { %> selected <% } %>><%= months[m] %></option>
+          <% } %>
+          </select>
+          <select class='form-control day-form' id='day-form' >
+            <% for(var da = 1; da < date_end+1; da++) { %>
+              <option value=<%= da %>> <%= da %> </option>
+            <% } %>
+          </select>
+          <select class='form-control year-form' id='year-form' >
+            <% for(var y = thisYear-5; y < thisYear+5; y++) { %>
+              <option value=<%= y %> <% if(thisYear == y) { %> selected <% } %>> <%= y %> </option>
+            <% } %>
+          </select>
+        </div>
         <div class="form-group time-form">
           <label for="time-start">Time Start</label>
           <select class="form-control hour-start" id="hour-start">

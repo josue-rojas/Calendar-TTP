@@ -53,14 +53,25 @@
   display: flex;
   padding: 0;
 }
+.date:hover{
+  background-color: #cecece;
+}
 .day-number{
   position: absolute;
-  background: #e8e8e8;
   padding: 0 5px;
   z-index: 2;
 }
 .date:hover{
   cursor: pointer;
+}
+.hasEvent:hover .low-bar{
+  background-color: #1d8234;
+}
+.hasEvent:hover .medium-bar{
+  background-color: #d19f0a;
+}
+.hasEvent:hover .high-bar{
+  background-color: #af2a37;
 }
 .no-date{
   background-color: #cecece;
@@ -165,9 +176,23 @@
   display: inline-block;
 }
 
+.calendar-wrapper .cal-month:hover, .calendar-wrapper .cal-year:hover{
+  color: #e2e2e2;
+}
+
 
 .cal-month:hover, .cal-year:hover{
   cursor: pointer;
+}
+.date-form{
+  display: flex;
+}
+.date-form select{
+  display: inline-block;
+  margin: 20px 10px 20px 0
+}
+.date-form select:last-child{
+  margin-right: 0;
 }
 .tablet-name, .desktop-name{
   display: none;
