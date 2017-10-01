@@ -5,7 +5,6 @@ from collections import Counter
 #if any other letter is left then add them at the end (just in case) it is not in t
 def sortByString(s, t):
     sCount = Counter(s) #count the letter for each
-    sList = list(s) # this is used for remaining letters if it's not in t
     sortedSt = ''
     for letter in t:
         sortedSt += ''.join([letter for i in range(sCount.pop(letter,0))])
