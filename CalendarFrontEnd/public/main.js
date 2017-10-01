@@ -152,7 +152,7 @@ function showForm(id=-1){
     $('#min-end').val(0)
     disableButton('#low')
   }
-  $('.row.events').find('.events-date').text(month + ' ' + day + ', ' + year)
+  $('#day-form').val(day)
   switchView('.events-table-wrapper', '.events-form-wrapper')
 }
 
@@ -217,6 +217,9 @@ function submitNew(id=curID){
   minStart=parseInt($("#min-start").find(':selected').text())
   hourEnd=parseInt($("#hour-end").find(':selected').text())
   minEnd=parseInt($("#min-end").find(':selected').text())
+  day=parseInt($('#day-form').find(':selected').text())
+  month=$('#month-form').find(':selected').text()
+  year=parseInt($('#year-form').find(':selected').text())
   if(!checkTimes(hourStart, minStart, hourEnd, minEnd)){
     alert("Time Doesn't Makes Sense!!")
     return
