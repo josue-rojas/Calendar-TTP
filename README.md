@@ -1,6 +1,8 @@
 # CalenderTTP
 Calendar for TTP question: uses postgres, javascript, ejs templating, bootstrap, and css (I think that's it)
 
+# Part1 folder contains the answer for the first part
+
 ### How to use
 Before install:
 - Need postgres database
@@ -50,19 +52,22 @@ __/events/:id__
 __/events__
   ```bash
   # note: this doesnt check if month num or name is right or if the time is right (basically you can post anything as long as it fits the datatype)...
-  # example   
+  # example  
+  # post a new event
    curl -H "Content-Type: application/json" -X 'POST' https://calendarttp.herokuapp.com/events -d '{"year": 2017, "monthNum": 8, "month": "September", "day": 1, "hourStart": 0, "minStart": 0, "hourEnd": 1, "minEnd": 0, "priority": 2, "description":"send another event"}'
   ```
 __/events/:id__
   ```bash
   # note: this doesnt check if month num or name is right or if the time is right (basically you can post anything as long as it fits the datatype)...
-  # example   
+  # example
+  # updates an event with the specific id  
    curl -H "Content-Type: application/json" -X 'POST' https://calendarttp.herokuapp.com/events/35 -d '{"year": 2017, "monthNum": 8, "month": "September", "day": 1, "hourStart": 0, "minStart": 0, "hourEnd": 1, "minEnd": 0, "priority": 2, "description":"edit this event"}'
  ```
 #### DELETE
 __/events/:id__
   ```bash
   #example
+  # deletes an event with specific id
   curl -X 'DELETE' https://calendarttp.herokuapp.com/events/35
   ```
 
