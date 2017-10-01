@@ -14,16 +14,20 @@ monthToIndex={
   'December':11
 }
 indexToMonth=['January','February', 'March', 'April', 'May', 'June', 'July', 'August','September','October','November','December']
+rootFolder = __dirname.split('/').slice(0, -1).join('/')
 // ----------------------- node stuff --------------------
 var express = require('express');
 const { Pool } = require('pg') //postgres
 var parser = require('body-parser');
 const app = express();
+var path = require('path');
 
 // ----------------------- setup ------------------------
-app.use(express.static( "public" ));
+app.use(express.static( path.join(rootFolder,"/CalendarFrontEnd/public/" )));
 app.use(parser.json());
 app.set('view engine', 'ejs')
+app.set('views', path.join(rootFolder,'/CalendarFrontEnd/views'));
+// app.set('view','..CalendarFrontEnd/views')
 var connectionString = process.env.DATABASE_URL;
 const pool = new Pool({
   connectionString: connectionString,

@@ -11,7 +11,7 @@ Before install:
 1. In terminal
 ```bash
 npm install
-node start
+npm start
 ```
 2. go to http://localhost:8080
 3. thats it........
