@@ -17,7 +17,7 @@ def countWays(c, minus=0, change=change, denominations=[1,2,3]):
     # return  str(countWays(c, -1, change)) + str(countWays(c, -2, change)) + str(countWays(c, -3, change))
 
 def changePossibilities(amount, denominations):
-    data = countWays(4,denominations=denominations)
+    data = countWays(amount,denominations=denominations)
     cleanData = filter(None,re.split('\s?,*\s?',data)) # clean data
     # remove duplicates
     noDups = dict()
@@ -36,3 +36,4 @@ def changePossibilities(amount, denominations):
 # #     return len(allPoss)
 
 print changePossibilities(4, [3,2,1])
+print changePossibilities(3, [3,2,1])
