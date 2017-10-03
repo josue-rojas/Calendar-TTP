@@ -13,7 +13,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
   <script src="/main.js"></script>
 
-  <title>Calendar <%= thisMonth %> <%= thisYear %></title>
+  <title><%= thisMonth %> <%= thisYear %></title>
 </head>
 <body class='body' data-month='<%= thisMonth %>' data-year='<%= thisYear %>'>
   <!-- events table -->
@@ -183,45 +183,37 @@
       <div class="col-md-1"></div>
     </div>
 
-    <% dateStarted = false %>
     <% dayNumber = 1 %>
     <% totalCell = Math.ceil((date_name_start + date_end)/7) * 9 %>
     <% for(total=0; total < totalCell; total++){%>
       <% if(total%9 == 0){ %>
-      <div class="row">
-        <div class="col-md-1"></div>
-          <!-- days --->
-      <% }else if(total%9 < 8){ %>
-      <div class="col-md-1 date">
-        <% if(date_name_start == total-1){ %>
-          <% dateStarted = true %>
-        <% } %>
-        <% if(dateStarted && dayNumber < date_end+1){ %>
-          <div class='day-number' data-day='<%= dayNumber %>'>
-            <%= dayNumber++ %>
+        <div class="row">
+          <div class="col-md-1"></div>
+          <% }else if(total%9 < 8){ %>
+            <div class="col-md-1 date">
+              <% if(date_name_start <= total-1 && dayNumber < date_end+1){ %>
+                <div class='day-number' data-day='<%= dayNumber %>'>
+                  <%= dayNumber++ %>
+                </div>
+                <div class='priority-bars'>
+                  <span class='low-bar'></span>
+                  <span class='medium-bar'></span>
+                  <span class='high-bar'></span>
+                </div>
+              <% } %>
+            </div>
+          <% }else{ %>
+            <div class="col-md-1"></div>
           </div>
-          <div class='priority-bars'>
-            <span class='low-bar'></span>
-            <span class='medium-bar'></span>
-            <span class='high-bar'></span>
-          </div>
-        <% } %>
-      </div>
-    <% }else if(total%9 == 8){ %>
-      <div class="col-md-1"></div>
-      </div>
+          <% } %>
     <% } %>
-  <% } %>
 </div>
   <!-- ummm this is all the events (i should maybe store it somewhere else) maybe i should request it when viewing the day and here just request the priorities, and days, then delete year and month cause that is repetetive -->
-  <!-- also some data is being repeated like month and year, that should be known or assumed -->
   <div class='data-events'>
     <% priorities = {"0": "low", "1": "medium", "2": "high"}%>
     <% for(var d=0; d < events.length; d++){ %>
       <div class='single-event'
         data-id=<%= events[d]['id'] %>
-        data-eventyear=<%= events[d]['year'] %>
-        data-month=<%= events[d]['month'] %>
         data-eventday=<%= events[d]['day'] %>
         data-hourstart=<%= events[d]['hourstart'] %>
         data-minstart=<%= events[d]['minstart'] %>
