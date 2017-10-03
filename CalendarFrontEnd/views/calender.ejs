@@ -190,115 +190,13 @@
       <% if(total%9 == 0){ %>
       <div class="row">
         <div class="col-md-1"></div>
-          <!-- sunday --->
-      <% }else if(total%9 == 1){ %>
+          <!-- days --->
+      <% }else if(total%9 < 8){ %>
       <div class="col-md-1 date">
-        <% if(date_name_start == 0){ %>
+        <% if(date_name_start == total-1){ %>
           <% dateStarted = true %>
         <% } %>
         <% if(dateStarted && dayNumber < date_end+1){ %>
-          <div class='day-number' data-day='<%= dayNumber %>'>
-            <%= dayNumber++ %>
-          </div>
-          <div class='priority-bars'>
-            <span class='low-bar'></span>
-            <span class='medium-bar'></span>
-            <span class='high-bar'></span>
-          </div>
-        <% } %>
-      </div>
-    <!-- monday --->
-    <% }else if(total%9 == 2){ %>
-      <div class="col-md-1 date">
-        <% if(date_name_start == 1){ %>
-          <% dateStarted = true %>
-        <% } %>
-        <% if(dateStarted  && dayNumber < date_end+1){ %>
-          <div class='day-number' data-day='<%= dayNumber %>'>
-            <%= dayNumber++ %>
-          </div>
-          <div class='priority-bars'>
-            <span class='low-bar'></span>
-            <span class='medium-bar'></span>
-            <span class='high-bar'></span>
-          </div>
-        <% } %>
-      </div>
-    <!-- tuesday --->
-    <% }else if(total%9 == 3){ %>
-      <div class="col-md-1 date">
-        <% if(date_name_start == 2){ %>
-          <% dateStarted = true %>
-        <% } %>
-        <% if(dateStarted  && dayNumber < date_end+1){ %>
-          <div class='day-number' data-day='<%= dayNumber %>'>
-            <%= dayNumber++ %>
-          </div>
-          <div class='priority-bars'>
-            <span class='low-bar'></span>
-            <span class='medium-bar'></span>
-            <span class='high-bar'></span>
-          </div>
-        <% } %>
-      </div>
-    <!-- wednesday --->
-    <% }else if(total%9 == 4){ %>
-      <div class="col-md-1 date">
-        <% if(date_name_start == 3){ %>
-          <% dateStarted = true %>
-        <% } %>
-        <% if(dateStarted  && dayNumber < date_end+1){ %>
-          <div class='day-number' data-day='<%= dayNumber %>'>
-            <%= dayNumber++ %>
-          </div>
-          <div class='priority-bars'>
-            <span class='low-bar'></span>
-            <span class='medium-bar'></span>
-            <span class='high-bar'></span>
-          </div>
-        <% } %>
-      </div>
-    <!-- thursday --->
-    <% }else if(total%9 == 5){ %>
-      <div class="col-md-1 date">
-        <% if(date_name_start == 4){ %>
-          <% dateStarted = true %>
-        <% } %>
-        <% if(dateStarted  && dayNumber < date_end+1){ %>
-          <div class='day-number' data-day='<%= dayNumber %>'>
-            <%= dayNumber++ %>
-          </div>
-          <div class='priority-bars'>
-            <span class='low-bar'></span>
-            <span class='medium-bar'></span>
-            <span class='high-bar'></span>
-          </div>
-        <% } %>
-      </div>
-    <!-- friday --->
-    <% }else if(total%9 == 6){ %>
-      <div class="col-md-1 date">
-        <% if(date_name_start == 5){ %>
-          <% dateStarted = true %>
-        <% } %>
-        <% if(dateStarted  && dayNumber < date_end+1){ %>
-          <div class='day-number' data-day='<%= dayNumber %>'>
-            <%= dayNumber++ %>
-          </div>
-          <div class='priority-bars'>
-            <span class='low-bar'></span>
-            <span class='medium-bar'></span>
-            <span class='high-bar'></span>
-          </div>
-        <% } %>
-      </div>
-    <!-- saturday --->
-    <% }else if(total%9 == 7){ %>
-      <div class="col-md-1 date">
-        <% if(date_name_start == 6){ %>
-          <% dateStarted = true %>
-        <% } %>
-        <% if(dateStarted  && dayNumber < date_end+1){ %>
           <div class='day-number' data-day='<%= dayNumber %>'>
             <%= dayNumber++ %>
           </div>
