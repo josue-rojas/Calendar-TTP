@@ -110,13 +110,14 @@ $( document ).ready(function() {
 function changeCal(){
   window.location = ('/date?month=' + monthToIndex[$('#month-change').find(':selected').text()] + '&year=' + $('#year-change').find(':selected').text()).replace(' ', '')
 }
-function showChooser(show=true){
-  if(show) {
-    $('.calendar-wrapper .month-name').addClass('show-chooser')
-    return
-  }
-  $('.calendar-wrapper .month-name').removeClass('show-chooser')
-}
+// not used; made month selected default for presentation
+// function showChooser(show=true){
+//   if(show) {
+//     $('.calendar-wrapper .month-name').addClass('show-chooser')
+//     return
+//   }
+//   $('.calendar-wrapper .month-name').removeClass('show-chooser')
+// }
 // this switches views
 function switchView(viewHide, viewShow){
   $(viewHide).fadeOut(150, function(){
